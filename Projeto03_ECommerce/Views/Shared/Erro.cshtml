@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Erro";
+}
+
+<h2>Ocorreu o seguinte erro: </h2>
+
+<div class="alert alert-danger">
+    @Html.Raw(ViewBag.MensagemErro)
+</div>
+
+@if (ViewBag.VoltarListaProduto == true || ViewBag.VoltarListaProduto != null)
+{
+    <div>
+        @Html.ActionLink("Voltar para a lista de produtos", "Index")
+    </div>
+}

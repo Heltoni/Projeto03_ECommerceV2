@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBClientes">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cnpj" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Endereco" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBItens">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PedidoId" Type="int" Nullable="false" />
+          <Property Name="ProdutoId" Type="int" Nullable="false" />
+          <Property Name="Quantidade" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBPedidos">
+          <Key>
+            <PropertyRef Name="PedidoId" />
+          </Key>
+          <Property Name="PedidoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteId" Type="int" Nullable="false" />
+          <Property Name="DataPedido" Type="datetime" Nullable="false" />
+          <Property Name="NumeroPedido" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBProdutos">
+          <Key>
+            <PropertyRef Name="ProdutoId" />
+          </Key>
+          <Property Name="ProdutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Unidade" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ValorUnitario" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_TBItens_TBPedidos">
+          <End Role="TBPedidos" Type="Self.TBPedidos" Multiplicity="1" />
+          <End Role="TBItens" Type="Self.TBItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBPedidos">
+              <PropertyRef Name="PedidoId" />
+            </Principal>
+            <Dependent Role="TBItens">
+              <PropertyRef Name="PedidoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBItens_TBProdutos">
+          <End Role="TBProdutos" Type="Self.TBProdutos" Multiplicity="1" />
+          <End Role="TBItens" Type="Self.TBItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBProdutos">
+              <PropertyRef Name="ProdutoId" />
+            </Principal>
+            <Dependent Role="TBItens">
+              <PropertyRef Name="ProdutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBPedidos_TBClientes">
+          <End Role="TBClientes" Type="Self.TBClientes" Multiplicity="1" />
+          <End Role="TBPedidos" Type="Self.TBPedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBClientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="TBPedidos">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EcommerceModelStoreContainer">
+          <EntitySet Name="TBClientes" EntityType="Self.TBClientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBItens" EntityType="Self.TBItens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBPedidos" EntityType="Self.TBPedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBProdutos" EntityType="Self.TBProdutos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TBItens_TBPedidos" Association="Self.FK_TBItens_TBPedidos">
+            <End Role="TBPedidos" EntitySet="TBPedidos" />
+            <End Role="TBItens" EntitySet="TBItens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBItens_TBProdutos" Association="Self.FK_TBItens_TBProdutos">
+            <End Role="TBProdutos" EntitySet="TBProdutos" />
+            <End Role="TBItens" EntitySet="TBItens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBPedidos_TBClientes" Association="Self.FK_TBPedidos_TBClientes">
+            <End Role="TBClientes" EntitySet="TBClientes" />
+            <End Role="TBPedidos" EntitySet="TBPedidos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EcommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cnpj" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Endereco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.FK_TBPedidos_TBClientes" FromRole="TBClientes" ToRole="TBPedidos" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PedidoId" Type="Int32" Nullable="false" />
+          <Property Name="ProdutoId" Type="Int32" Nullable="false" />
+          <Property Name="Quantidade" Type="Double" Nullable="false" />
+          <NavigationProperty Name="PedidoInfo" Relationship="Self.FK_TBItens_TBPedidos" FromRole="TBItens" ToRole="TBPedidos" />
+          <NavigationProperty Name="ProdutoInfo" Relationship="Self.FK_TBItens_TBProdutos" FromRole="TBItens" ToRole="TBProdutos" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="PedidoId" />
+          </Key>
+          <Property Name="PedidoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteId" Type="Int32" Nullable="false" />
+          <Property Name="DataPedido" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NumeroPedido" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClienteInfo" Relationship="Self.FK_TBPedidos_TBClientes" FromRole="TBPedidos" ToRole="TBClientes" />
+          <NavigationProperty Name="Itens" Relationship="Self.FK_TBItens_TBPedidos" FromRole="TBPedidos" ToRole="TBItens" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="ProdutoId" />
+          </Key>
+          <Property Name="ProdutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Unidade" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ValorUnitario" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Itens" Relationship="Self.FK_TBItens_TBProdutos" FromRole="TBProdutos" ToRole="TBItens" />
+        </EntityType>
+        <Association Name="FK_TBPedidos_TBClientes">
+          <End Role="TBClientes" Type="EcommerceModel.Cliente" Multiplicity="1" />
+          <End Role="TBPedidos" Type="EcommerceModel.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBClientes">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="TBPedidos">
+              <PropertyRef Name="ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBItens_TBPedidos">
+          <End Role="TBPedidos" Type="EcommerceModel.Pedido" Multiplicity="1" />
+          <End Role="TBItens" Type="EcommerceModel.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBPedidos">
+              <PropertyRef Name="PedidoId" />
+            </Principal>
+            <Dependent Role="TBItens">
+              <PropertyRef Name="PedidoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TBItens_TBProdutos">
+          <End Role="TBProdutos" Type="EcommerceModel.Produto" Multiplicity="1" />
+          <End Role="TBItens" Type="EcommerceModel.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBProdutos">
+              <PropertyRef Name="ProdutoId" />
+            </Principal>
+            <Dependent Role="TBItens">
+              <PropertyRef Name="ProdutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ECommerceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="EcommerceModel.Cliente" />
+          <EntitySet Name="Itens" EntityType="EcommerceModel.Item" />
+          <EntitySet Name="Pedidos" EntityType="EcommerceModel.Pedido" />
+          <EntitySet Name="Produtos" EntityType="EcommerceModel.Produto" />
+          <AssociationSet Name="FK_TBPedidos_TBClientes" Association="Self.FK_TBPedidos_TBClientes">
+            <End Role="TBClientes" EntitySet="Clientes" />
+            <End Role="TBPedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBItens_TBPedidos" Association="Self.FK_TBItens_TBPedidos">
+            <End Role="TBPedidos" EntitySet="Pedidos" />
+            <End Role="TBItens" EntitySet="Itens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TBItens_TBProdutos" Association="Self.FK_TBItens_TBProdutos">
+            <End Role="TBProdutos" EntitySet="Produtos" />
+            <End Role="TBItens" EntitySet="Itens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EcommerceModelStoreContainer" CdmEntityContainer="ECommerceEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="EcommerceModel.Cliente">
+              <MappingFragment StoreEntitySet="TBClientes">
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Itens">
+            <EntityTypeMapping TypeName="EcommerceModel.Item">
+              <MappingFragment StoreEntitySet="TBItens">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="PedidoId" ColumnName="PedidoId" />
+                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+                <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedidos">
+            <EntityTypeMapping TypeName="EcommerceModel.Pedido">
+              <MappingFragment StoreEntitySet="TBPedidos">
+                <ScalarProperty Name="PedidoId" ColumnName="PedidoId" />
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="DataPedido" ColumnName="DataPedido" />
+                <ScalarProperty Name="NumeroPedido" ColumnName="NumeroPedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produtos">
+            <EntityTypeMapping TypeName="EcommerceModel.Produto">
+              <MappingFragment StoreEntitySet="TBProdutos">
+                <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Unidade" ColumnName="Unidade" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Projeto03_ECommerce.Models.Chamado>
+
+@{
+    ViewBag.Title = "Lista de Chamados";
+}
+
+<h2>Lista de Chamados</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DataChamado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cnpj)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assunto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resposta)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataChamado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cnpj)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Assunto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resposta)
+        </td>
+        <td>
+            @Html.ActionLink("Responder", "Responder", new { id=item.ChamadoID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Projeto03_ECommerce.ViewModel.ItensPedidoViewModel>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroPedido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorTotal)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroPedido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorTotal)
+        </td>
+    </tr>
+}
+
+</table>

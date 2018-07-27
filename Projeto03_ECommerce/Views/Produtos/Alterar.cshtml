@@ -1,0 +1,58 @@
+﻿@model Projeto03_ECommerce.Models.Produto
+
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        @using (Html.BeginForm())
+        {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                    <span class="sr-only">Close</span>                    
+                </button>
+                <h4 class="modal-title">Editar Produto</h4>
+            </div>
+
+            @Html.AntiForgeryToken()
+
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.ProdutoId)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Unidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Unidade, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Unidade, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ValorUnitario, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ValorUnitario, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ValorUnitario, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Salvar Alterações" class="btn btn-primary" />
+                <input type="button" value="Cancelar" class="btn btn-default"  data-dismiss="modal"/>
+            </div>
+        }
+    </div>
+</div>

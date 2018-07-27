@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Exemplo01 - Javascript puro</title>
+    <script type="text/javascript">
+        function exibirValores() {
+            //obtendo os valores dos campos de entrada
+            var vCodigo = document.getElementById("codigo").value;
+            var vDescricao = document.getElementById("descricao").value;
+            var vPreco = document.getElementById("preco").value;
+
+            //gerando uma resposta
+            var resposta = "Código: " + vCodigo +
+                "<br/>Descrição: " + vDescricao +
+                "<br/>Preço: " + vPreco;
+
+            //exibindo a resposta em uma caixa de mensagens
+            //alert(resposta);
+
+            //exibindo a resposta na div
+            var vResultado = document.getElementById("resultado");
+            vResultado.innerHTML = resposta;
+        }
+    </script>
+</head>
+<body>
+    <div> 
+        <form>
+            <h1>Simulando um cadastro de produtos</h1>
+            <label>Código</label><br/>
+            <input type="number" id="codigo"/><br/>
+
+            <label>Descrição</label><br />
+            <input type="text" id="descricao" /><br />
+
+            <label>Preço</label><br />
+            <input type="text" id="preco" /><br />
+
+            <input type="button" value="Exibir Valores" onclick="exibirValores();" />
+            <br/>
+            <div id="resultado"></div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Projeto03_ECommerce.Models.Cliente>
+
+@{
+    ViewBag.Title = "Listar";
+}
+
+<h2>Listar todos os clientes</h2>
+
+<p>
+    @Html.ActionLink("Incluir novo cliente", "Incluir")
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Cnpj)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cnpj)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Endereco)
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "Alterar", new { id=item.ClienteId }) |
+            @Html.ActionLink("Detalhes", "Detalhes", new { id=item.ClienteId }) |
+            @Html.ActionLink("Excluir", "Excluir", new { id=item.ClienteId })
+            
+        </td>
+    </tr>
+    
+}
+
+</table>

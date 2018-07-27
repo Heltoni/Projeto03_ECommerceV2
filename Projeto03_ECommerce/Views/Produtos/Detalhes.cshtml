@@ -1,0 +1,45 @@
+﻿@model Projeto03_ECommerce.Models.Produto
+
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">x</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">Detalhes do produto</h4>
+        </div>
+
+        <div class="modal-body">
+            <p>
+                @Html.DisplayNameFor(m => m.ProdutoId) : 
+                @Html.DisplayFor(m => m.ProdutoId)
+            </p>
+
+            <p>
+                @Html.DisplayNameFor(m => m.Descricao) :
+                @Html.DisplayFor(m => m.Descricao)
+            </p>
+
+            <p>
+                @Html.DisplayNameFor(m => m.Unidade) :
+                @Html.DisplayFor(m => m.Unidade)
+            </p>
+
+            <p>
+                @Html.DisplayNameFor(m => m.ValorUnitario) :
+                @Html.DisplayFor(m => m.ValorUnitario)
+            </p>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+                Fechar
+            </button>
+        </div>
+    </div>
+</div>

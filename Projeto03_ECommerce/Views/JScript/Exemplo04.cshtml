@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Exemplo04</title>
+    <style>
+        .ok {
+            border: 1px solid green;
+            background-color: lightgreen;
+            color: green;
+            padding: 20px; 
+            width: 80%;
+        }
+        .erro {
+            border: 1px solid red;
+            background-color: lightpink;
+            color: red;
+            padding: 20px;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div> 
+        <h1>Simulando cadastro de alunos</h1>
+        Nome: <br/>
+        <input type="text" id="nome"/><br/>
+
+        Idade: <br />
+        <input type="text" id="idade" /><br />
+
+        <select id="lista"></select><br/>
+
+        <input type="button" id="btnEnviar" value="Enviar"/><br/>
+
+        <div id="resposta"></div>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/FuncoesJS/funcoes_exemplo04.js"></script>
+</body>
+</html>

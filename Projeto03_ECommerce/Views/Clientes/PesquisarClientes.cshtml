@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Pesquisar Clientes";
+}
+
+<h2>Pesquisar Clientes</h2>
+
+@using (Ajax.BeginForm("PesquisarClientes", 
+    new AjaxOptions { UpdateTargetId = "resultado" }))
+{
+    <div class="form-group">
+        @Html.Label("Informe partes do nome do cliente", 
+            htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBox("busca", null, htmlAttributes: 
+                new { @class="form-control"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Buscar" class="btn btn-info" />
+        </div>
+    </div>
+}
+
+<div id="resultado"></div>
+

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Projeto03_ECommerce.ViewModel.ClientePedidoViewModel>
+
+@{
+    ViewBag.Title = "Listar Pedidos";
+}
+
+<h2>Listar pedidos por cliente</h2>
+
+@using (Html.BeginForm("ListarPedidos", "Pedidos", FormMethod.Get))
+{
+    <div class="form-group">
+        @Html.Label("Escolha o cliente: ",
+            htmlAttributes: new { @class="control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.DropDownList("id", (SelectList)ViewBag.Clientes,
+                "TODOS", htmlAttributes: new { @class="form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Mostrar Pedidos" class="btn btn-info" />
+        </div>
+    </div>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataPedido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroPedido)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DataPedido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroPedido)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Listar Itens (Ajax)";
+}
+
+<h2>Listar Itens (Ajax)</h2>
+
+@using (Ajax.BeginForm("ListarItensAjax", new
+                AjaxOptions { UpdateTargetId = "resultado" }))
+{
+    <div class="form-group">
+        @Html.Label("Escolha o pedido: ",
+            htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("id", (SelectList)ViewBag.Pedidos,
+                "TODOS", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+}
+
+<div id="resultado"></div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#id").change(function () {
+                //lendo o valor do dropdownlist
+                var codigo = $(this).val();
+
+                //executando o método, e exibindo o resultado
+                //na div "resultado":
+                $("#resultado").load("/Itens/ListarItensAjax/" + codigo);
+            });
+        });
+    </script>       
+}

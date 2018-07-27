@@ -1,0 +1,56 @@
+﻿@model Projeto03_ECommerce.Models.Produto
+
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">x</span>
+                <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">Excluir Produto</h4>
+            <h3>Você tem certeza que deseja excluir este produto?</h3>
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Unidade)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Unidade)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ValorUnitario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ValorUnitario)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ProdutoId)
+            <div class="modal-body">
+                <div class="modal-footer">
+                    <input type="submit" value="Excluir" class="btn btn-danger" />
+                    <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

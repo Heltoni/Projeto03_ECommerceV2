@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Projeto03_ECommerce.Models.Produto>
+
+@{
+    ViewBag.Title = "Listar";
+}
+
+<h2>Listar produtos</h2>
+
+<p>
+    @Html.ActionLink("Incluir novo produto", "Incluir")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorUnitario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorUnitario)
+        </td>
+        <td>
+            <button class="btn btn-warning alterar" data-id="@item.ProdutoId">
+                Alterar <i class="glyphicon glyphicon-pencil"></i>
+            </button> |            
+            
+            <button class="btn btn-info detalhes" data-id="@item.ProdutoId">
+                Ver <i class="glyphicon glyphicon-eye-open"></i>
+            </button> |
+           
+            <button class="btn btn-danger excluir" data-id="@item.ProdutoId">
+                Excluir <i class="glyphicon glyphicon-trash"></i>
+                @*@Html.ActionLink("Excluir", "Excluir", new { id = item.ProdutoId })*@
+            </button>
+        </td>
+    </tr>
+}
+</table>
+
+<div class="modal" id="modal"></div>
+
+@section scripts {
+    <script>
+        $(function () {
+            //detalhes do produto
+            $(".detalhes").click(function () {
+                var produtoId = $(this).attr("data-id");
+                $("#modal").load("Detalhes?id=" + produtoId, function () {
+                    $("#modal").modal();
+                });
+            });
+
+            //alteração do produto
+            $(".alterar").click(function () {
+                var produtoId = $(this).attr("data-id");
+                $("#modal").load("Alterar?id=" + produtoId, function () {
+                    $("#modal").modal();
+                });
+            });
+
+            //exclusão do produto
+            $(".excluir").click(function () {
+                var produtoId = $(this).attr("data-id");
+                $("#modal").load("Excluir?id=" + produtoId, function () {
+                    $("#modal").modal();
+                });
+            });
+        });
+    </script>    
+}

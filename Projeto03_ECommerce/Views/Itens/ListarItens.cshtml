@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Projeto03_ECommerce.ViewModel.ItensPedidoViewModel>
+
+@{
+    ViewBag.Title = "ListarItens";
+}
+
+<h2>ListarItens</h2>
+
+@using (Html.BeginForm("ListarItens", "Itens", FormMethod.Get))
+{
+    <div class="form-group">
+        @Html.Label("Escolha o pedido: ",
+            htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("id", (SelectList)ViewBag.Pedidos,
+                "TODOS", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Mostrar Itens" class="btn btn-info" />
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroPedido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorTotal)
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroPedido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantidade)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorTotal)
+        </td>
+    </tr>
+}
+
+</table>
